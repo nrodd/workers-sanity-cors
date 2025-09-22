@@ -30,13 +30,22 @@ export async function addCors(origin: string) {
 
 export async function removeCors(origin: string) {
     // Get list of existing CORS origins
-    const res = await fetch(
-        `https://api.sanity.io/v2021-06-07/projects/${SANITY_PROJECT_ID}/cors`,
-        {
-            headers: { Authorization: `Bearer ${SANITY_TOKEN}` },
+    let origins: Array<{ id: string; origin: string }> = [];
+    try {
+        const res = await fetch(
+            `https://api.sanity.io/v2021-06-07/projects/${SANITY_PROJECT_ID}/cors`,
+            {
+                headers: { Authorization: `Bearer ${SANITY_TOKEN}` },
+            }
+        );
+        if (!res.ok) {
+            throw new Error(`Failed to fetch CORS origins: ${res.status} ${res.statusText}`);
         }
-    );
-    const origins = await res.json() as Array<{ id: string; origin: string }>;
+        origins = await res.json() as Array<{ id: string; origin: string }>;
+    } catch (error) {
+        console.error("Error fetching or parsing CORS origins:", error);
+        return;
+    }
     const match = origins.find((o) => o.origin === origin);
 
     if (match) {
