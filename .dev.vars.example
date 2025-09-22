@@ -1,0 +1,7 @@
+# Copy this file to .dev.vars for local development
+# These variables will be used when running `wrangler dev`
+
+GITHUB_WEBHOOK_SECRET=your_webhook_secret_here
+SANITY_PROJECT_ID=your_project_id_here
+SANITY_TOKEN=your_sanity_token_here
+WORKERS_DOMAIN=your-domain.workers.dev
