@@ -7,6 +7,9 @@
 	"name": "workers-sanity-cors",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-09-22",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
 	"observability": {
 		"enabled": true
 	}

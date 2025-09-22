@@ -165,3 +165,6 @@ dist
 .env*
 !.env.example
 .wrangler/
+
+# Generated types (run `wrangler types` to regenerate)
+worker-configuration.d.ts
