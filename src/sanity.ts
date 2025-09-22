@@ -1,6 +1,12 @@
-const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || "";
-const SANITY_TOKEN = process.env.SANITY_TOKEN || "";
+const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+const SANITY_TOKEN = process.env.SANITY_TOKEN;
 
+if (!SANITY_PROJECT_ID) {
+    throw new Error("Missing required environment variable: SANITY_PROJECT_ID");
+}
+if (!SANITY_TOKEN) {
+    throw new Error("Missing required environment variable: SANITY_TOKEN");
+}
 export async function addCors(origin: string) {
     await fetch(`https://api.sanity.io/v2021-06-07/projects/${SANITY_PROJECT_ID}/cors`, {
         method: "POST",
