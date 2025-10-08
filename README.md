@@ -2,20 +2,13 @@
 
 > A Cloudflare Worker that automatically manages Sanity CORS origins for preview deployments from GitHub PRs.
 
-## 🚀 What it does
+## What it does
 
 - **On deployment success**: Automatically adds the preview deployment URL to Sanity CORS allowlist
 - **On PR close/merge**: Automatically removes the preview URL from Sanity CORS allowlist
-- **Webhook verification**: Securely validates GitHub webhook signatures
+- **Webhook verification**: Securely validates GitHub webhook signature
 
-## 📋 Prerequisites
-
-- [Cloudflare Workers account](https://workers.cloudflare.com/)
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) installed and authenticated
-- [Sanity project](https://www.sanity.io/) with API access
-- GitHub repository with webhook access
-
-## 🛠️ Setup
+## Setup
 
 ### 1. Clone and install
 
@@ -80,8 +73,8 @@ You can also configure these manually through the cloudflare workers admin setti
 4. Set **Content type** to: `application/json`
 5. Set **Secret** to the same value you used for `GITHUB_WEBHOOK_SECRET`
 6. Select individual events:
-   - ✅ **Deployment statuses**
-   - ✅ **Pull requests**
+   - **Deployment statuses**
+   - **Pull requests**
 7. Ensure the webhook is **Active**
 8. Click "Add webhook"
 
@@ -97,19 +90,7 @@ Find this in your Sanity project dashboard URL: `sanity.io/manage/personal/proje
 4. Create a new token with **Editor** permissions
 5. Copy the token value
 
-## 🧪 Testing
-
-Run the test suite:
-```bash
-npm test
-```
-
-Run in development mode:
-```bash
-npm run dev
-```
-
-## 🔧 Development
+## Development
 
 ### Local development
 ```bash
@@ -119,33 +100,8 @@ npm run dev
 ### Type checking
 ```bash
 npx wrangler types  # Regenerate types
-npm run test        # Run tests
 ```
 
-### Project structure
-```
-src/
-├── index.ts      # Main Worker entry point
-├── github.ts     # GitHub webhook verification
-└── sanity.ts     # Sanity CORS management
-
-test/
-└── index.spec.ts # Test suite
-```
-
-## 📚 How it works
-
-1. **GitHub sends webhook** when deployments complete or PRs are opened/closed
-2. **Worker verifies signature** using your webhook secret
-3. **For successful deployments**: Extracts the deployment URL and adds it to Sanity CORS
-4. **For closed PRs**: Constructs the PR preview URL and removes it from Sanity CORS
-
-## 🔒 Security
-
-- All secrets are stored as Wrangler secrets (not in code)
-- GitHub webhook signatures are cryptographically verified
-- CORS origins are managed through Sanity's secure API
-
-## 📄 License
+## License
 
 MIT
